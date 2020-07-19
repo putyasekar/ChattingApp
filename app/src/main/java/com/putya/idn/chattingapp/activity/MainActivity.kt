@@ -1,4 +1,4 @@
-package com.putya.idn.chattingapp
+package com.putya.idn.chattingapp.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import com.putya.idn.chattingapp.R
 import com.putya.idn.chattingapp.fragment.ChatFragment
 import com.putya.idn.chattingapp.fragment.SearchFragment
 import com.putya.idn.chattingapp.fragment.SettingFragment
@@ -26,7 +27,10 @@ class MainActivity : AppCompatActivity() {
 
         val tabLayout: TabLayout = findViewById(R.id.tab_layout)
         val viewPager: ViewPager = findViewById(R.id.view_pager)
-        val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        val viewPagerAdapter =
+            ViewPagerAdapter(
+                supportFragmentManager
+            )
 
         viewPagerAdapter.addFragment(ChatFragment(), "chats")
         viewPagerAdapter.addFragment(SearchFragment(), "search")

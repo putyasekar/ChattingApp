@@ -7,4 +7,10 @@
     <string name="text_password">Password</string>
     <string name="text_signup">Sign Up</string>
     <string name="text_signin">Sign In</string>
+    <string name="write_message_here">write message here...</string>
+    <string name="search_users_here">Search users here...</string>
+    <string name="send_message">send message</string>
+    <string name="welcome">welcome</string>
+    <string name="register">register</string>
+    <string name="login">login</string>
 </resources>
