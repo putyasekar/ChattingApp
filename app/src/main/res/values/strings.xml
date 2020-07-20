@@ -10,7 +10,13 @@
     <string name="write_message_here">write message here...</string>
     <string name="search_users_here">Search users here...</string>
     <string name="send_message">send message</string>
+    <string name="text_message_username">Please write username</string>
+    <string name="text_message_email">Please write email</string>
+    <string name="text_message_password">Please write password</string>
     <string name="welcome">welcome</string>
     <string name="register">register</string>
     <string name="login">login</string>
+    <string name="text_error_message">Error Message :</string>
+    <string name="text_user">Users</string>
+    <string name="text_sign_out">Sign Out</string>
 </resources>
