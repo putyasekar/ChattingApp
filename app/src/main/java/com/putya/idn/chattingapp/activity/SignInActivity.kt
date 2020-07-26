@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
+import com.putya.idn.chattingapp.MainActivity
 import com.putya.idn.chattingapp.R
 import kotlinx.android.synthetic.main.activity_sign_in.*
 

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.putya.idn.chattingapp.MainActivity
 import com.putya.idn.chattingapp.R
 import kotlinx.android.synthetic.main.activity_welcome.*
 
@@ -26,7 +27,6 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
     }
 
     override fun onStart() {

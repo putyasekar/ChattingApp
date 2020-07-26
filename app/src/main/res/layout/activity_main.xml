@@ -21,8 +21,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_profile"
-                android:layout_width="@dimen/_32"
-                android:layout_height="@dimen/_32"
+                android:layout_width="@dimen/_32dp"
+                android:layout_height="@dimen/_32dp"
                 android:src="@drawable/ic_profile"
                 android:tint="@android:color/white" />
 
@@ -50,6 +50,5 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
 </LinearLayout>

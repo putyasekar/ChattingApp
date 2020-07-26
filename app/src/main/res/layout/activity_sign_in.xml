@@ -56,6 +56,6 @@
             android:background="@android:color/white"
             android:text="@string/text_signin"
             android:textColor="@android:color/white" />
-    </LinearLayout>
 
+    </LinearLayout>
 </RelativeLayout>
