@@ -68,7 +68,7 @@ class SearchFragment : Fragment() {
 
         queryUsers.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                
             }
 
             override fun onDataChange(p0: DataSnapshot) {
