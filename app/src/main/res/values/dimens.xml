@@ -18,4 +18,5 @@
     <dimen name="_18dp">18dp</dimen>
     <dimen name="_32dp">32dp</dimen>
     <dimen name="_6dp">6dp</dimen>
+    <dimen name="_39dp">_39dp</dimen>
 </resources>

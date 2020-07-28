@@ -1,14 +1,12 @@
 package com.putya.idn.chattingapp.fragment
 
 import android.os.Bundle
-import android.os.UserHandle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +18,6 @@ import com.google.firebase.database.ValueEventListener
 import com.putya.idn.chattingapp.R
 import com.putya.idn.chattingapp.adapter.UserAdapter
 import com.putya.idn.chattingapp.model.Users
-import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment() {
     private var userAdapter: UserAdapter? = null
@@ -32,7 +29,6 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
         val view: View = inflater.inflate(R.layout.fragment_search, container, false)
         searchEdit = view.findViewById(R.id.searchUserset)
@@ -68,7 +64,7 @@ class SearchFragment : Fragment() {
 
         queryUsers.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                
+
             }
 
             override fun onDataChange(p0: DataSnapshot) {
