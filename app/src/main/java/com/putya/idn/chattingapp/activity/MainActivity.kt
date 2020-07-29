@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity() {
         refUsers = FirebaseDatabase.getInstance()
             .reference.child("Users").child(firebaseUser!!.uid)
 
-
-
         val toolBar: Toolbar = findViewById(R.id.tool_bar)
         setSupportActionBar(toolBar)
         supportActionBar!!.title = ""

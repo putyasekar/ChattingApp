@@ -20,4 +20,7 @@
     <string name="text_user">Users</string>
     <string name="text_sign_out">Sign Out</string>
     <string name="text_chat_fragment">Chat Fragment</string>
+    <string name="upload">Uploading</string>
+    <string name="wait_for_upload">Images uploading, please wait...</string>
+    <string name="updated">Updated Succesfully</string>
 </resources>
