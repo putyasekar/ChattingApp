@@ -23,4 +23,7 @@
     <string name="upload">Uploading</string>
     <string name="wait_for_upload">Images uploading, please wait...</string>
     <string name="updated">Updated Succesfully</string>
+    <string name="write_message_first">Please write a message first</string>
+    <string name="pick_image">Pick Image</string>
+    <string name="image_upload">Upload image</string>
 </resources>

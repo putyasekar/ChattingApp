@@ -1,12 +1,17 @@
 package com.putya.idn.chattingapp.adapter
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.putya.idn.chattingapp.R
+import com.putya.idn.chattingapp.activity.MessageChatActivity
+import com.putya.idn.chattingapp.activity.VisitUserProfileActivity
 import com.putya.idn.chattingapp.model.Users
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
@@ -40,6 +45,28 @@ class UserAdapter(mContext: Context, mUsers: List<Users>, isChatCheck: Boolean) 
         val user: Users = mUsers[position]
         holder.userName.text = user!!.getUserName()
         Picasso.get().load(user.getProfile()).placeholder(R.drawable.profile).into(holder.profile)
+
+        holder.itemView.setOnClickListener {
+            val options = arrayOf<CharSequence>(
+                "Send Message", "Visit Profile"
+            )
+            val builder: AlertDialog.Builder = AlertDialog.Builder(mContext)
+            builder.setTitle("What do you want?")
+            builder.setItems(options, DialogInterface.OnClickListener { dialog, position ->
+                if (position == 0) {
+                    val intent = Intent(mContext, MessageChatActivity::class.java)
+                    intent.putExtra("visit_id", user.getUID())
+                    mContext.startActivity(intent)
+
+                }
+                if (position == 1) {
+                    val intent = Intent(mContext, VisitUserProfileActivity::class.java)
+                    intent.putExtra("visit_id", user.getUID())
+                    mContext.startActivity(intent)
+                }
+            })
+            builder.show()
+        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
