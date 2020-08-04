@@ -19,4 +19,7 @@
     <dimen name="_32dp">32dp</dimen>
     <dimen name="_6dp">6dp</dimen>
     <dimen name="_39dp">39dp</dimen>
+    <dimen name="_40dp">40dp</dimen>
+    <dimen name="_100dp">100dp</dimen>
+    <dimen name="_5dp">5dp</dimen>
 </resources>

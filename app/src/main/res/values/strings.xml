@@ -26,4 +26,7 @@
     <string name="write_message_first">Please write a message first</string>
     <string name="pick_image">Pick Image</string>
     <string name="image_upload">Upload image</string>
+    <string name="no_message">No Message</string>
+    <string name="image_sent">Image has already sended</string>
+    <string name="image_view">Image View</string>
 </resources>

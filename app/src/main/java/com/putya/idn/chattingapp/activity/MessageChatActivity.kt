@@ -3,26 +3,30 @@ package com.putya.idn.chattingapp.activity
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageTask
+import com.google.firebase.storage.UploadTask
 import com.putya.idn.chattingapp.R
+import com.putya.idn.chattingapp.model.Chat
 import com.putya.idn.chattingapp.model.Users
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_message_chat.*
 
 class MessageChatActivity : AppCompatActivity() {
     var firebaseUser: FirebaseUser? = null
     var reference: DatabaseReference? = null
+    var mChatList: List<Chat>? = null
     var userIDVisit: String = ""
     var notify = false
 
@@ -88,6 +92,7 @@ class MessageChatActivity : AppCompatActivity() {
             } else {
                 sendMessageToUser(firebaseUser!!.uid, userIDVisit, message)
             }
+            et_message.setText("")
         }
     }
 
@@ -95,8 +100,29 @@ class MessageChatActivity : AppCompatActivity() {
 
     }
 
-    private fun retrieveMessage(uid: String, userIDVisit: String?, profile: String?) {
+    private fun retrieveMessage(senderId: String, receiverId: String?, imageProfile: String?) {
+        mChatList = ArrayList()
+        val reference = FirebaseDatabase.getInstance().reference.child("Chats")
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
 
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                (mChatList as ArrayList<Chat>).clear()
+                for (snapshot in p0.children) {
+                    val chat = snapshot.getValue(Chat::class.java)
+                    if (chat!!.getReceiver().equals(senderId) && chat.getSender()
+                            .equals(receiverId) || chat.getReceiver()
+                            .equals(receiverId) && chat.getSender().equals(senderId)
+                    ) {
+                        (mChatList as ArrayList<Chat>).add(chat)
+                    }
+                    //DIO! attach adapter!!!!
+                }
+            }
+
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -114,6 +140,56 @@ class MessageChatActivity : AppCompatActivity() {
             val filePath = storageReference.child("$messageID.jpg")
             var uploadTask: StorageTask<*>
             uploadTask = filePath.putFile(fileUri!!)
+
+            uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                return@Continuation filePath.downloadUrl
+            }).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val downloadUrl = task.result
+                    var url = downloadUrl.toString()
+
+                    val messageHashMap = HashMap<String, Any?>()
+                    messageHashMap["sender"] = firebaseUser!!.uid
+                    messageHashMap["message"] = "sent you an image"
+                    messageHashMap["receiver"] = userIDVisit
+                    messageHashMap["iSeen"] = false
+                    messageHashMap["url"] = url
+                    messageHashMap["messageID"] = messageID
+
+                    ref.child("Chats").child(messageID!!).setValue(messageHashMap)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                progressDialog.dismiss()
+
+                                val reference =
+                                    FirebaseDatabase.getInstance().reference.child("Users")
+                                        .child(firebaseUser!!.uid)
+                                reference.addValueEventListener(object : ValueEventListener {
+                                    override fun onCancelled(error: DatabaseError) {
+
+                                    }
+
+                                    override fun onDataChange(p0: DataSnapshot) {
+                                        val user = p0.getValue(Users::class.java)
+                                        if (notify) {
+                                            sendNotification(
+                                                userIDVisit,
+                                                user!!.getUserName(),
+                                                "Sent you an image"
+                                            )
+                                        }
+                                        notify = false
+                                    }
+                                })
+                            }
+                        }
+                }
+            }
         }
     }
 
@@ -153,7 +229,6 @@ class MessageChatActivity : AppCompatActivity() {
 
                                 chatListReceiverReference.child("id").setValue(firebaseUser!!.uid)
                             }
-
                         }
                     })
                 }
