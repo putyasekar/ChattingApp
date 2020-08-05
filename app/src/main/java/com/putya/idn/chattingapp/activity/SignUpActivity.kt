@@ -1,9 +1,9 @@
 package com.putya.idn.chattingapp.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -12,7 +12,7 @@ import com.putya.idn.chattingapp.MainActivity
 import com.putya.idn.chattingapp.R
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
-class SignupActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var refUsers: DatabaseReference
@@ -41,7 +41,7 @@ class SignupActivity : AppCompatActivity() {
     private fun signupUser() {
         val username: String = et_user_name_signup.text.toString()
         val email: String = et_email.text.toString()
-        val password: String = et_password.text.toString()
+        val password: String = et_password_signup.text.toString()
 
         if (username == "") {
             Toast.makeText(this, getString(R.string.text_message_username), Toast.LENGTH_LONG)
@@ -88,6 +88,7 @@ class SignupActivity : AppCompatActivity() {
                         this, getString(R.string.text_error_message) + task.exception!!
                             .message.toString(), Toast.LENGTH_LONG
                     ).show()
+
                 }
             }
         }

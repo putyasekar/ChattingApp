@@ -58,7 +58,7 @@ class SettingFragment : Fragment() {
                     val user: Users? = p0.getValue(Users::class.java)
 
                     if (context != null) {
-                        view.tv_username_settings.text = user!!.getUserName()
+                        view.tv_user_name_setting.text = user!!.getUserName()
                         Picasso.get().load(user.getProfile()).into(view.iv_profile_setting)
                         Picasso.get().load(user.getCover()).into(view.iv_cover)
                     }
@@ -77,15 +77,15 @@ class SettingFragment : Fragment() {
             pickImage()
         }
 
-        view.iv_setting_facebook.setOnClickListener {
+        view.iv_facebook.setOnClickListener {
             socialMediaCheck = "facebook"
             socialMediaLink()
         }
-        view.iv_setting_instagram.setOnClickListener {
+        view.iv_instagram.setOnClickListener {
             socialMediaCheck = "instagram"
             socialMediaLink()
         }
-        view.iv_setting_website.setOnClickListener {
+        view.iv_website.setOnClickListener {
             socialMediaCheck = "website"
             socialMediaLink()
         }

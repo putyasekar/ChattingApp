@@ -31,8 +31,8 @@ class SearchFragment : Fragment() {
     ): View? {
 
         val view: View = inflater.inflate(R.layout.fragment_search, container, false)
-        searchEdit = view.findViewById(R.id.searchUserset)
-        recyclerView = view.findViewById(R.id.searchList)
+        searchEdit = view.findViewById(R.id.et_search)
+        recyclerView = view.findViewById(R.id.rv_search_list)
         recyclerView!!.setHasFixedSize(true)
         recyclerView!!.layoutManager = LinearLayoutManager(context)
 

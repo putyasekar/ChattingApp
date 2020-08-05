@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.SearchFragment">
 
     <EditText
-        android:id="@+id/searchUserset"
+        android:id="@+id/et_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_6dp"
-        android:hint="@string/search_users_here"/>
+        android:hint="@string/text_search_user_here" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchList"
+        android:id="@+id/rv_search_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/searchUserset">
+        android:layout_below="@id/et_search" />
 
-    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

@@ -3,10 +3,10 @@ package com.putya.idn.chattingapp.model
 class Chat {
     private var sender: String = ""
     private var message: String = ""
-    private var receiver: String = ""
+    private var receiver : String = ""
     private var iseen = false
-    private var url: String = ""
-    private var messageId: String = ""
+    private var url : String = ""
+    private var messageId : String = ""
 
     constructor()
 
@@ -29,48 +29,43 @@ class Chat {
     fun getSender(): String? {
         return sender
     }
-
-    fun setSender(sender: String?) {
+    fun setSender(sender: String?){
         this.sender = sender!!
     }
 
     fun getMessage(): String? {
         return message
     }
-
-    fun setMessage(sender: String?) {
+    fun setMessage(message: String?){
         this.message = message!!
     }
 
     fun getReceiver(): String? {
         return receiver
     }
-
-    fun setReceiver(receiver: String?) {
+    fun setReceiver(receiver: String?){
         this.receiver = receiver!!
     }
 
-    fun isSeen(): Boolean? {
+    fun isSeen(): Boolean{
         return iseen
     }
-
-    fun setIseen(iseen: Boolean?) {
+    fun setIseen(iseen: Boolean?){
         this.iseen = iseen!!
     }
 
     fun getUrl(): String? {
         return url
     }
-
-    fun setUrl(url: String?) {
+    fun setUrl(url: String?){
         this.url = url!!
     }
 
     fun getMessageID(): String? {
         return messageId
     }
-
-    fun setMessageID(messageId: String?) {
+    fun setMessageId(messageId: String?){
         this.messageId = messageId!!
     }
+
 }

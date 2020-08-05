@@ -18,9 +18,11 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import com.putya.idn.chattingapp.R
+import com.putya.idn.chattingapp.adapter.ChatAdapter
 import com.putya.idn.chattingapp.model.Chat
 import com.putya.idn.chattingapp.model.Users
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_message_chat.*
 
 class MessageChatActivity : AppCompatActivity() {
@@ -28,6 +30,7 @@ class MessageChatActivity : AppCompatActivity() {
     var reference: DatabaseReference? = null
     var mChatList: List<Chat>? = null
     var userIDVisit: String = ""
+    var chatAdapter: ChatAdapter? = null
     var notify = false
 
     lateinit var recyclerViewChat: RecyclerView
@@ -37,7 +40,7 @@ class MessageChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_message_chat)
 
         //toolbar!!!!
-        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_message_chat)
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_chat)
         setSupportActionBar(toolbar)
         supportActionBar!!.title = ""
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -49,7 +52,7 @@ class MessageChatActivity : AppCompatActivity() {
         firebaseUser = FirebaseAuth.getInstance().currentUser
 
         //chat list!!!!
-        recyclerViewChat = findViewById(R.id.recycler_view_chats)
+        recyclerViewChat = findViewById(R.id.rv_chat_message)
         recyclerViewChat.setHasFixedSize(true)
         var linearLayoutManager = LinearLayoutManager(applicationContext)
         linearLayoutManager.stackFromEnd = true
@@ -64,14 +67,14 @@ class MessageChatActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 val user: Users? = p0.getValue(Users::class.java)
-                username_mchat.text = user!!.getUserName()
-                Picasso.get().load(user.getProfile()).into(profile_image_mchat)
+                tv_username_chat.text = user!!.getUserName()
+                Picasso.get().load(user.getProfile()).into(iv_profile)
 
                 retrieveMessage(firebaseUser!!.uid, userIDVisit, user.getProfile())
             }
         })
 
-        attct_image_file_btn.setOnClickListener {
+        iv_attact_image_file.setOnClickListener {
             notify = true
             val intent = Intent()
             intent.action = Intent.ACTION_GET_CONTENT
@@ -96,14 +99,18 @@ class MessageChatActivity : AppCompatActivity() {
         }
     }
 
-    private fun seenMessage(userIDVisit: String?) {
+    var seenListener: ValueEventListener? = null
+    private fun seenMessage(userIdVisit: String?) {
+        val reference = FirebaseDatabase.getInstance().reference.child("Chats")
 
+        //activate seen listener
     }
 
     private fun retrieveMessage(senderId: String, receiverId: String?, imageProfile: String?) {
         mChatList = ArrayList()
         val reference = FirebaseDatabase.getInstance().reference.child("Chats")
         reference.addValueEventListener(object : ValueEventListener {
+
             override fun onCancelled(error: DatabaseError) {
 
             }
@@ -119,9 +126,14 @@ class MessageChatActivity : AppCompatActivity() {
                         (mChatList as ArrayList<Chat>).add(chat)
                     }
                     //DIO! attach adapter!!!!
+
+                    chatAdapter = ChatAdapter(
+                        this@MessageChatActivity,
+                        (mChatList as ArrayList<Chat>), imageProfile!!
+                    )
+                    recyclerViewChat.adapter = chatAdapter
                 }
             }
-
         })
     }
 
@@ -215,6 +227,7 @@ class MessageChatActivity : AppCompatActivity() {
 
                     chatListReference.addListenerForSingleValueEvent(object :
                         ValueEventListener {
+
                         override fun onCancelled(error: DatabaseError) {
 
                         }
@@ -234,10 +247,11 @@ class MessageChatActivity : AppCompatActivity() {
                 }
             }
 
-        //push notif!!!!
+        //push notification!!!!
         val userReference =
             FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser!!.uid)
         userReference.addValueEventListener(object : ValueEventListener {
+
             override fun onCancelled(error: DatabaseError) {
 
             }

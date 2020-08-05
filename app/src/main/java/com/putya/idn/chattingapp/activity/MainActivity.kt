@@ -24,17 +24,18 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    var firebaseUser :FirebaseUser? = null
-    var refUsers : DatabaseReference? = null
+    var firebaseUser: FirebaseUser? = null
+    var refUsers: DatabaseReference? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        firebaseUser= FirebaseAuth.getInstance().currentUser
+        firebaseUser = FirebaseAuth.getInstance().currentUser
         refUsers = FirebaseDatabase.getInstance()
             .reference.child("Users").child(firebaseUser!!.uid)
+
 
         val toolBar: Toolbar = findViewById(R.id.tool_bar)
         setSupportActionBar(toolBar)
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val tabLayout: TabLayout = findViewById(R.id.tab_layout)
-        val viewPager : ViewPager = findViewById(R.id.view_pager)
+        val viewPager: ViewPager = findViewById(R.id.view_pager)
 
         val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
         viewPagerAdapter.addFragment(ChatFragment(), "chats")
@@ -52,9 +53,9 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = viewPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
 
-        refUsers!!.addValueEventListener(object : ValueEventListener{
+        refUsers!!.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     val user: Users? = snapshot.getValue(Users::class.java)
 
                     tv_user_name.text = user!!.getUserName()
@@ -74,8 +75,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.action_signout ->{
+        when (item.itemId) {
+            R.id.action_signout -> {
                 FirebaseAuth.getInstance().signOut()
 
                 val intent = Intent(this, WelcomeActivity::class.java)
@@ -89,11 +90,12 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-    internal class ViewPagerAdapter(fragmentManager : FragmentManager):
-        FragmentPagerAdapter(fragmentManager){
+    internal class ViewPagerAdapter(fragmentManager: FragmentManager) :
+        FragmentPagerAdapter(fragmentManager) {
 
-        private val titles : ArrayList<String>
-        private val fragments : ArrayList<Fragment>
+        private val titles: ArrayList<String>
+        private val fragments: ArrayList<Fragment>
+
         init {
             titles = ArrayList()
             fragments = ArrayList()
@@ -111,7 +113,7 @@ class MainActivity : AppCompatActivity() {
             return titles[position]
         }
 
-        fun addFragment(fragment : Fragment, title: String){
+        fun addFragment(fragment: Fragment, title: String) {
             fragments.add(fragment)
             titles.add(title)
         }

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ViewFullImageActivity">
+    tools:context=".activity.FullViewImageActivity">
 
     <ImageView
-        android:id="@+id/image_viewer"
+        android:id="@+id/iv_full_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

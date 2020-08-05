@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.putya.idn.chattingapp.R
 import com.putya.idn.chattingapp.activity.MessageChatActivity
-import com.putya.idn.chattingapp.activity.VisitUserProfileActivity
+import com.putya.idn.chattingapp.activity.VisitProfileActivity
 import com.putya.idn.chattingapp.model.Chat
 import com.putya.idn.chattingapp.model.Users
 import com.squareup.picasso.Picasso
@@ -84,7 +84,7 @@ class UserAdapter(mContext: Context, mUsers: List<Users>, isChatCheck: Boolean) 
 
                 }
                 if (position == 1) {
-                    val intent = Intent(mContext, VisitUserProfileActivity::class.java)
+                    val intent = Intent(mContext, VisitProfileActivity::class.java)
                     intent.putExtra("visit_id", user.getUID())
                     mContext.startActivity(intent)
                 }
@@ -135,11 +135,11 @@ class UserAdapter(mContext: Context, mUsers: List<Users>, isChatCheck: Boolean) 
         var lastMessage: TextView
 
         init {
-            userName = itemView.findViewById(R.id.username)
-            profile = itemView.findViewById(R.id.profile_image)
-            onlineStatus = itemView.findViewById(R.id.image_online)
-            offlineStatus = itemView.findViewById(R.id.image_offline)
-            lastMessage = itemView.findViewById(R.id.message_last)
+            userName = itemView.findViewById(R.id.tv_username_chat)
+            profile = itemView.findViewById(R.id.iv_profile_search)
+            onlineStatus = itemView.findViewById(R.id.iv_online)
+            offlineStatus = itemView.findViewById(R.id.iv_offline)
+            lastMessage = itemView.findViewById(R.id.tv_message_last)
         }
     }
 }

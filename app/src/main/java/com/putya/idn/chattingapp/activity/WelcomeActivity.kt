@@ -17,12 +17,12 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
-        register_welcome_btn.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
+        btn_welcome_sign_up.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
             finish()
         }
-        login_welcome_btn.setOnClickListener {
+        btn_welcome_signin.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
             finish()
