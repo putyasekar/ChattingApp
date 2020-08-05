@@ -14,17 +14,18 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 import com.putya.idn.chattingapp.R
 import com.putya.idn.chattingapp.activity.MessageChatActivity
 import com.putya.idn.chattingapp.activity.VisitProfileActivity
 import com.putya.idn.chattingapp.model.Chat
 import com.putya.idn.chattingapp.model.Users
-import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class UserAdapter(mContext: Context, mUsers: List<Users>, isChatCheck: Boolean) :
-    RecyclerView.Adapter<UserAdapter.ViewHolder?>() {
-
+class UserAdapter(
+    mContext: Context, mUsers: List<Users>,
+    isChatCheck: Boolean
+) : RecyclerView.Adapter<UserAdapter.ViewHolder?>() {
     private val mContext: Context
     private val mUsers: List<Users>
     private val isChatCheck: Boolean
@@ -37,9 +38,10 @@ class UserAdapter(mContext: Context, mUsers: List<Users>, isChatCheck: Boolean) 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapter.ViewHolder {
-        val view: View =
-            LayoutInflater.from(mContext).inflate(R.layout.user_search_item_layout, parent, false)
+        val view: View = LayoutInflater.from(mContext)
+            .inflate(R.layout.user_search_item_layout, parent, false)
         return ViewHolder(view)
+
     }
 
     override fun getItemCount(): Int {
@@ -75,13 +77,12 @@ class UserAdapter(mContext: Context, mUsers: List<Users>, isChatCheck: Boolean) 
                 "Send Message", "Visit Profile"
             )
             val builder: AlertDialog.Builder = AlertDialog.Builder(mContext)
-            builder.setTitle("What do you want?")
+            builder.setTitle("What do you want")
             builder.setItems(options, DialogInterface.OnClickListener { dialog, position ->
                 if (position == 0) {
                     val intent = Intent(mContext, MessageChatActivity::class.java)
                     intent.putExtra("visit_id", user.getUID())
                     mContext.startActivity(intent)
-
                 }
                 if (position == 1) {
                     val intent = Intent(mContext, VisitProfileActivity::class.java)
@@ -90,21 +91,24 @@ class UserAdapter(mContext: Context, mUsers: List<Users>, isChatCheck: Boolean) 
                 }
             })
             builder.show()
+
         }
     }
 
     private fun retrieveLastMessage(chatUid: String?, lastMessage: TextView) {
         lastMsg = "defaultMsg"
         val firebaseUser = FirebaseAuth.getInstance().currentUser
-        val reference = FirebaseDatabase.getInstance().reference.child("Chats")
+        val reference = FirebaseDatabase.getInstance()
+            .reference.child("Chats")
 
         reference.addValueEventListener(object : ValueEventListener {
+
             override fun onCancelled(error: DatabaseError) {
 
             }
 
-            override fun onDataChange(p0: DataSnapshot) {
-                for (dataSnapshot in p0.children) {
+            override fun onDataChange(snapshots: DataSnapshot) {
+                for (dataSnapshot in snapshots.children) {
                     val chat: Chat? = dataSnapshot.getValue(Chat::class.java)
                     if (firebaseUser != null && chat != null) {
                         if (chat.getReceiver() == firebaseUser!!.uid &&
@@ -118,11 +122,12 @@ class UserAdapter(mContext: Context, mUsers: List<Users>, isChatCheck: Boolean) 
                 }
                 when (lastMsg) {
                     "defaultMsg" -> lastMessage.text = mContext.getString(R.string.no_message)
-                    "sent you an image" -> lastMessage.text =
+                    "sent you an image " -> lastMessage.text =
                         mContext.getString(R.string.image_sent)
                     else -> lastMessage.text = lastMsg
                 }
                 lastMsg = "defaultMsg"
+
             }
         })
     }
@@ -135,7 +140,7 @@ class UserAdapter(mContext: Context, mUsers: List<Users>, isChatCheck: Boolean) 
         var lastMessage: TextView
 
         init {
-            userName = itemView.findViewById(R.id.tv_username_chat)
+            userName = itemView.findViewById(R.id.tv_username_search)
             profile = itemView.findViewById(R.id.iv_profile_search)
             onlineStatus = itemView.findViewById(R.id.iv_online)
             offlineStatus = itemView.findViewById(R.id.iv_offline)

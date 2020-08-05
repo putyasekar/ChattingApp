@@ -35,7 +35,6 @@ class ChatAdapter(mContext: Context, mChatList: List<Chat>, imageUrl: String) :
         this.imageUrl = imageUrl
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatAdapter.ViewHolder {
         return if (viewType == 1) {
             val view: View = LayoutInflater.from(mContext)
@@ -57,7 +56,8 @@ class ChatAdapter(mContext: Context, mChatList: List<Chat>, imageUrl: String) :
         Picasso.get().load(imageUrl).into(holder.imageProfile)
 
         if (chat.getMessage().equals("sent an image") && !chat.getUrl().equals("")) {
-            //right
+
+            //right!!!!!
             if (chat.getSender().equals(firebaseUser!!.uid)) {
                 holder.textMessageShow!!.visibility = View.GONE
                 holder.rightImage!!.visibility = View.GONE
@@ -84,7 +84,8 @@ class ChatAdapter(mContext: Context, mChatList: List<Chat>, imageUrl: String) :
                     builder.show()
                 }
             }
-            //left
+
+            //left!!!!!
             else if (!chat.getSender().equals(firebaseUser!!.uid))
                 holder.textMessageShow!!.visibility = View.GONE
             holder.leftImage!!.visibility = View.GONE
@@ -106,7 +107,8 @@ class ChatAdapter(mContext: Context, mChatList: List<Chat>, imageUrl: String) :
                 builder.show()
             }
         }
-        //text
+
+        //text!!!!!
         else {
             holder.textMessageShow!!.text = chat.getMessage()
             if (firebaseUser!!.uid == chat.getSender()) {
@@ -125,7 +127,8 @@ class ChatAdapter(mContext: Context, mChatList: List<Chat>, imageUrl: String) :
                 }
             }
         }
-        //sent
+
+        //send!!!!!
         if (position == mChatList.size - 1) {
             if (chat.isSeen()) {
                 holder.textSeen!!.text = "Seen"
