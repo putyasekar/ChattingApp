@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Chatting App</string>
-    <string name="text_user_name">UserName</string>
+    <string name="text_user_name">Username</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hapus aja sob</string>
     <string name="text_email">Email</string>
     <string name="text_password">Password</string>
-    <string name="text_signup">SignUp</string>
-    <string name="text_signin">SignIn</string>
+    <string name="text_signup">Sign Up</string>
+    <string name="text_signin">Sign In</string>
     <string name="text_welcome">Welcome</string>
     <string name="text_register">Register</string>
     <string name="text_chat_fragment">Chat Fragment</string>
@@ -18,11 +18,11 @@
     <string name="text_error_message">Error Message :</string>
     <string name="text_user">Users</string>
     <string name="text_sign_out">Sign Out</string>
-    <string name="text_search_user_here">Search user here ..</string>
+    <string name="text_search_user_here">Search User Here</string>
     <string name="upload">Uploading</string>
     <string name="wait_for_upload">Image is uploading, please wait...</string>
-    <string name="write_something">Please write something ...</string>
-    <string name="updated">Updated Successfully</string>
+    <string name="write_something">Please write something...</string>
+    <string name="updated">Update Successfully</string>
     <string name="image_button">Image Button</string>
     <string name="write_message_here">Write Message Here</string>
     <string name="write_message_first">Please write a message first...</string>

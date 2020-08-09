@@ -222,7 +222,8 @@ class MessageChatActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val chatListReference = FirebaseDatabase.getInstance()
-                        .reference.child("ChatList").child(firebaseUser!!.uid)
+                        .reference.child("ChatList")
+                        .child(firebaseUser!!.uid)
                         .child(userIDVisit)
 
                     chatListReference.addListenerForSingleValueEvent(object :
