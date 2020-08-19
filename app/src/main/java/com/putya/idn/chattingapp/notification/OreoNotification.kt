@@ -7,12 +7,8 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.ContextWrapper
-import android.graphics.drawable.Icon
-import android.icu.text.CaseMap
 import android.net.Uri
 import android.os.Build
-import retrofit2.http.Body
-import java.nio.channels.Channel
 
 class OreoNotification(context: Context?) : ContextWrapper(context) {
     private var notificationManager: NotificationManager? = null

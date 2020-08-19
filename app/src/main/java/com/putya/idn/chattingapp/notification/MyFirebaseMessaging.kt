@@ -3,15 +3,12 @@ package com.putya.idn.chattingapp.notification
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.Context.MODE_PRIVATE
-import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.core.Context
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.putya.idn.chattingapp.activity.MessageChatActivity
@@ -24,7 +21,7 @@ class MyFirebaseMessaging : FirebaseMessagingService() {
 
         val sented = p0.data["sented"]
         val user = p0.data["user"]
-        val sharedPref = getSharedPreferences("PREFS", Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences("PREFS", android.content.Context.MODE_PRIVATE)
         val currentOnlineUser = sharedPref.getString("currentUser", "none")
         val firebaseuser = FirebaseAuth.getInstance().currentUser
         if (firebaseuser != null && sented == firebaseuser.uid) {
@@ -60,7 +57,8 @@ class MyFirebaseMessaging : FirebaseMessagingService() {
             .setContentText(body).setAutoCancel(true).setSound(defaultSound)
             .setContentIntent(pendingIntent)
 
-        val notif = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notif =
+            getSystemService(android.content.Context.NOTIFICATION_SERVICE) as NotificationManager
         var i = 0
         if (not > 0) {
             i = not
