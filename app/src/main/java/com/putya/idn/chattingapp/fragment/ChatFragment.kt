@@ -17,7 +17,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.putya.idn.chattingapp.R
 import com.putya.idn.chattingapp.adapter.UserAdapter
 import com.putya.idn.chattingapp.model.ChatList
-import com.putya.idn.chattingapp.model.Token
+import com.putya.idn.chattingapp.notification.Token
 import com.putya.idn.chattingapp.model.Users
 
 class ChatFragment : Fragment() {

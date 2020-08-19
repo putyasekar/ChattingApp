@@ -1,4 +1,4 @@
-package com.putya.idn.chattingapp.model
+package com.putya.idn.chattingapp.notification
 
 class Token {
     private var token: String = ""
